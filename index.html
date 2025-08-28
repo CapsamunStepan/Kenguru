@@ -2,32 +2,69 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Кенгурёнок</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>Кенгурёнок</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <div class="content">
-    <canvas id="c" width="500" height="500" class="canvas_cnt"></canvas>
-    <br>
-    <textarea id="code" rows="8" cols="40" class="command_cnt">начало
+<div class="content">
+    <div class="canvas-container">
+        <canvas id="canvas" width="500" height="500" class="canvas"></canvas>
+    </div>
+    <div class="code-editor-container">
+        <div class="nav-buttons">
+            <button onclick="run()" role="button" class="golden-button">
+                <span class="golden-text">Запустить</span>
+            </button>
+            <button id="clearTextarea">
+                <span>Очистить</span>
+            </button>
+            <button onclick="" role="button" class="golden-button">
+                <span class="golden-text">Загрузить</span>
+            </button>
+            <button onclick="" role="button" class="golden-button">
+                <span class="golden-text">Сохранить</span>
+            </button>
+        </div>
+        <div class="code-editor-label">
+            <label for="code">Введите команды:</label>
+        </div>
+        <div class="code-editor-textarea">
+            <div class="textarea-container">
+                <div class="start-command">
+                    Начало
+                </div>
+                <textarea id="code" rows="8" cols="40" class="code"></textarea>
+                <div class="end-command">
+                    Конец
+                </div>
+            </div>
+            <div class="code-buttons">
+                <button id="addStep">
+                    <span>Шаг</span>
+                </button>
+                <button id="addTurn">
+                    <span>Поворот</span>
+                </button>
+                <button id="addJump">
+                    <span>Прыжок</span>
+                </button>
+                <button id="repeatX">
+                    <span>Повтори x раз</span>
+                </button>
+                <button id="endRepeat">
+                    <span>Конец повтора</span>
+                </button>
+                <button id="removeLastCommand">
+                    <span>Удалить последнее</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
-конец</textarea>
-  </div>
-
-  <div class="buttons"></div>
-  <button onclick="run()" role="button" class="golden-button">
-    <span class="golden-text">Запустить</span>
-  </button>
-  <!--
-    <button onclick="load()" role="button" class="golden-button">
-      <span class="golden-text">Загрузить</span>
-    </button>
-    -->
-
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 
 </html>
