@@ -1,6 +1,9 @@
 const textarea = document.getElementById("code");
 
 const clearTextareaButton = document.getElementById("clearTextarea");
+const fileInput = document.getElementById("fileInput");
+const loadFileButton = document.getElementById("loadFile");
+const saveCodeInFileButton = document.getElementById("saveCodeInFile");
 
 const addStepButton = document.getElementById("addStep");
 const addTurnButton = document.getElementById("addTurn");
@@ -12,6 +15,47 @@ const addRemoveLastCommandButton = document.getElementById("removeLastCommand");
 clearTextareaButton.addEventListener("click", () => {
     textarea.value = "";
     textarea.dispatchEvent(new Event('input'));
+})
+
+loadFileButton.addEventListener("click", () => {
+    fileInput.click();
+})
+
+fileInput.addEventListener("change", () => {
+    if (fileInput.files.length === 0) return;
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+        console.log(reader.result);
+        textarea.value = e.target.result;
+        textarea.dispatchEvent(new Event("input"));
+    };
+
+    reader.readAsText(file, "UTF-8");
+});
+
+saveCodeInFileButton.addEventListener("click", async () => {
+    const text = textarea.value;
+    if (!text.trim()) {
+        alert("Нет комманд для сохранения!");
+        return;
+    }
+
+    const fileHandle = await window.showSaveFilePicker({
+        suggestedName: "code.txt",
+        types: [
+            {
+                description: "Текстовые файлы",
+                accept: { "text/plain": [".txt"] },
+            },
+        ],
+    });
+
+    const writable = await fileHandle.createWritable();
+    await writable.write(text);
+    await writable.close();
 })
 
 addStepButton.addEventListener("click", () => {
@@ -81,17 +125,17 @@ addRemoveLastCommandButton.addEventListener("click", () => {
     textarea.dispatchEvent(new Event('input'));
 })
 
-textarea.placeholder = "Повтори 4 раза\nшаг\nповорот\nконец повтора";
+textarea.placeholder = "Повтори 4 раза\nШаг\nПрыжок\nПоворот\nКонец повтора";
 
 textarea.addEventListener('input', () => {
-    textarea.style.height = "auto"; // сбрасываем, чтобы пересчитать
-    textarea.style.height = Math.min(textarea.scrollHeight, 381) + "px";
+    textarea.style.height = "auto";
+    textarea.style.height = Math.min(textarea.scrollHeight, 390) + "px";
 });
 
 const canva = document.getElementById('canvas');
 const ctx = canva.getContext('2d');
 let x = 250, y = 250, angle = 0;
-const stepSize = 20;
+const stepSize = 14;
 
 function insideCanvas(nx, ny) {
     return nx >= 0 && ny >= 0 && nx <= canva.width && ny <= canva.height;

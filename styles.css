@@ -36,6 +36,10 @@ body {
     font-family: "Courier New", serif;
 }
 
+.end-command {
+    margin-top: -7px;
+}
+
 .code-buttons {
     display: flex;
     flex-direction: column;
@@ -59,7 +63,7 @@ body {
     resize: none;
     overflow: auto;
     width: 200px;
-    min-height: 165px;
+    min-height: 172px;
 }
 
 .code:hover {
@@ -77,6 +81,10 @@ body {
 
 #code:focus::placeholder {
     color: transparent; /* делаем текст плейсхолдера невидимым */
+}
+
+#fileInput {
+    display: none;
 }
 
 /* From Uiverse.io by Spacious74 */
